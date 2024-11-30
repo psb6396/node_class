@@ -5,5 +5,10 @@
 const queryString = '?query=JavaScript&page=2'
 
 // 여기에 코드를 작성하세요.
-const { URL } = require('url')
+const { URL, URLSearchParams } = require('url')
 
+const myurlparams = new URLSearchParams(queryString)
+console.log(myurlparams.get('query'))
+console.log(myurlparams.get('page'))
+// console.log(myurl.searchParams.get('query'))
+// console.log(myurl.searchParams.get('page'))
