@@ -5,3 +5,5 @@
 const queryString = '?query=JavaScript&page=2'
 
 // 여기에 코드를 작성하세요.
+const { URL } = require('url')
+

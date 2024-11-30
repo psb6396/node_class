@@ -5,3 +5,5 @@
 const os = require('os')
 
 // 여기에 코드를 작성하세요.
+console.log(os.totalmem())
+console.log(os.freemem())

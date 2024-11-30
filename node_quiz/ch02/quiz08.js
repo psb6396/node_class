@@ -7,3 +7,6 @@ const path = require('path')
 const filePath = './example.txt'
 
 // 여기에 코드를 작성하세요.
+
+console.log(path.extname(filePath))
+console.log(path.dirname(filePath))
