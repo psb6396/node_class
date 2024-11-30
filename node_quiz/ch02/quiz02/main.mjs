@@ -1,4 +1,5 @@
 // stringUtils.js에서 내보낸 toUpperCase()를 가져와 아래 코드를 완성하세요.
+import toUpperCase from "./stringUtils.mjs"
 
 const input = 'hello world'
 const result = toUpperCase(input)
