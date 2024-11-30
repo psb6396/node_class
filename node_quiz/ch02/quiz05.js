@@ -7,4 +7,6 @@ function calculate() {
    return sum
 }
 
+console.time('실행시간측정')
 calculate()
+console.timeEnd('실행시간측정')

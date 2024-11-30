@@ -5,3 +5,4 @@ const students = [
 ]
 
 // 조건: students 데이터를 표로 출력하세요.
+console.table(students)
