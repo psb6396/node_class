@@ -35,3 +35,10 @@ myEvent.on('event4', () => {
 //이벤트 제거
 myEvent.removeAllListeners('event4') //모든 이벤트 제거
 myEvent.emit('event4') //실행안됨
+
+myEvent.on('event5', () => {
+   console.log('이벤트 5 추가')
+})
+myEvent.emit('event5')
+
+myEvent.removeListener('event5')
