@@ -17,3 +17,24 @@ fs.access('./folder', constants.F_OK | constants.W_OK | constants.R_OK)
       //다른 에러는 그대로 전달
       return Promise.reject(err)
    })
+   .then(() => {
+      //폴더 생성이 성공했을 때
+      console.log('폴더 만들기 성공')
+      //file.js 파일 생성
+      //두번째 인수(어떤 동작으로 파일을 만들건지) => w: 쓰기 모드, r: 읽기모드, a: 기존 파일에 추가
+      return fs.open('./folder/file.js', 'w')
+   })
+   .then((fd) => {
+      //파일 생성이 성공했을 때
+      console.log('빈 파일 만들기 성공', fd)
+      //생성한 파일의 이름을 file.js -> newFile.js로 변경
+      return fs.rename('./folder/file.js', './folder/newfile.js')
+   })
+   .then(() => {
+      //파일 이름 변경이 성공했을 때
+      console.log('이름 바꾸기 성공')
+   })
+   .catch((err) => {
+      //모든 단계에서 발생한 에러를 처리
+      console.error(err)
+   })
