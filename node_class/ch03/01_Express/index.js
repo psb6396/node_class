@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
    res.send('안녕! node!')
 })
 
+app.get('/hello', (req, res) => {
+   res.send('안녕! nodesadfasdf!')
+})
+
 app.get('/test', (req, res) => {
    res.send('안녕! test!')
 })
