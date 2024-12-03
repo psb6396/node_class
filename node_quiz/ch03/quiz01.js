@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 // 전역 미들웨어: 모든 요청에 대해 실행됩니다.
-app.__(__, (req, res, next) => {
+app.use((req, res, next) => {
    console.log(`Request Method: ${req.method}, Request URL: ${req.url}`)
    next()
 })
