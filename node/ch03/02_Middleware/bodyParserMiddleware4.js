@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 })
 
 //4. body-parser 미들웨어: request 본문을 쉽게 처리할 수 있도록 도와주는 미들웨어
-// 요청 데이터를 josin 객체로 받아올 수 있게 한다
+// 요청 데이터를 json 객체로 받아올 수 있게 한다
 app.use(express.json())
 
 // URL-encoded 요청 본문 처리
