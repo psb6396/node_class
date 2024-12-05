@@ -16,6 +16,4 @@ app.get('/getId', (req, res) => {
    res.send(`쿠키: ${req.cookies.age}`)
 })
 
-
-
-app.listen(3000, () => console.log('Server running on http://localhost:3000'))
+app.listen(8000, () => console.log('Server running on http://localhost:8000'))
