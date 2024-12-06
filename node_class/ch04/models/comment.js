@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 
-MediaSourceHandle.exports = class Comment extends Sequelize.Model {
+module.exports = class Comment extends Sequelize.Model {
    static init(sequelize) {
       return super.init(
          {
@@ -29,7 +29,7 @@ MediaSourceHandle.exports = class Comment extends Sequelize.Model {
       )
    }
 
-   static associations(db) {
+   static associate(db) {
       //comment는 user에 속해있다
       db.Comment.belongsTo(db.User, {
          foreignKey: 'commenter', //Comment 외래키 컬럼 이름

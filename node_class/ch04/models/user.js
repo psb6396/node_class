@@ -48,7 +48,7 @@ module.exports = class User extends Sequelize.Model {
       )
    }
 
-   static associations(db) {
+   static associate(db) {
       //User : Comment = 1 : n
       //User가 Comment를 가지고있다 (User가 부모테이블, Comment는 자식테이블)
       db.User.hasMany(db.Comment, {
