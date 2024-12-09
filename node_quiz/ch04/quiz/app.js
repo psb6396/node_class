@@ -11,7 +11,7 @@ const { sequelize } = require('./models') // Sequelize를 통해 데이터베이
 dotenv.config()
 
 const app = express()
-app.set('port', process.env.PORT || 5000)
+app.set('port', process.env.PORT || 8000)
 
 // 데이터베이스 연결 설정
 
