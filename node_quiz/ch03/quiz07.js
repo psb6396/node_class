@@ -22,6 +22,16 @@ const upload = multer({
    //uploads 폴더에 파일을 올리고
    // 현재시간-파일명.png 형태로 이미지 파일을 저장
    // 파일 크기 제한은 7MB
+   storage: multer.diskStorage({
+      destination(req,file,done) {
+         done(null, 'uploads/')
+      },
+      //저장할 파일 이름 설정
+      filename(req, file, done) {
+         const ext = path.extname(file.originalname)
+         
+      }
+   })
 })
 
 app.get('/uploadFile', (req, res) => {
