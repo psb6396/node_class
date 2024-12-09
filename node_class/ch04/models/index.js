@@ -2,8 +2,10 @@ const Sequelize = require('sequelize')
 const User = require('./user')
 const Comment = require('./comment')
 
-const dotenv = require('dotenv')
+const Country = require('./country')
+const Capital = require('./capital')
 
+const dotenv = require('dotenv')
 //현재 실행환경을 가져옴
 const env = process.env.NODE_ENV || 'development'
 
@@ -22,12 +24,21 @@ db.sequelize = sequelize
 db.User = User
 db.Comment = Comment
 
+db.Country = Country
+db.Capital = Capital
+
 //모델을 초기화하고 데이터베이스와 연결
 User.init(sequelize)
 Comment.init(sequelize)
 
+Country.init(sequelize)
+Capital.init(sequelize)
+
 //모델과의 관계 설정(예 - 외래키, 연관 테이블 등)
 User.associate(db)
 Comment.associate(db)
+
+Country.associate(db)
+Capital.associate(db)
 
 module.exports = db
