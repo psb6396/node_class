@@ -5,6 +5,9 @@ const Comment = require('./comment')
 const Country = require('./country')
 const Capital = require('./capital')
 
+const Post = require('./post')
+const Hashtag = require('./hashtag')
+
 const dotenv = require('dotenv')
 //현재 실행환경을 가져옴
 const env = process.env.NODE_ENV || 'development'
@@ -27,6 +30,9 @@ db.Comment = Comment
 db.Country = Country
 db.Capital = Capital
 
+db.Post = Post
+db.Hashtag = Hashtag
+
 //모델을 초기화하고 데이터베이스와 연결
 User.init(sequelize)
 Comment.init(sequelize)
@@ -34,11 +40,16 @@ Comment.init(sequelize)
 Country.init(sequelize)
 Capital.init(sequelize)
 
+Post.init(sequelize)
+Hashtag.init(sequelize)
 //모델과의 관계 설정(예 - 외래키, 연관 테이블 등)
 User.associate(db)
 Comment.associate(db)
 
 Country.associate(db)
 Capital.associate(db)
+
+Post.associate(db)
+Hashtag.associate(db)
 
 module.exports = db
