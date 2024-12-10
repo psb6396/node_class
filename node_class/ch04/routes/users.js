@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../models/user')
+const Comment = require('../models/comment')
 
 const router = express.Router()
 
@@ -35,7 +36,7 @@ router
       }
    })
 
-//localhost:8000/user/:id/comments
+//localhost:8000/users/:id/comments
 router.get('/:id/comments', async (req, res, next) => {
    try {
       const comments = await Comment.findAll({
