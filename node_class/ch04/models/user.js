@@ -11,7 +11,7 @@ module.exports = class User extends Sequelize.Model {
             name: {
                type: Sequelize.STRING(20),
                // = varchar(20)
-               arrowNull: false,
+               allowNull: false,
                //null 제약조건 -> not null
                unique: true,
                //unique 제약조건 -> 중복허용 X
@@ -21,28 +21,28 @@ module.exports = class User extends Sequelize.Model {
                type: Sequelize.INTEGER.UNSIGNED,
                //Sequelize.INTEGER = 정수
                //INTEGER.UNSIGNED = 양수만 가능한 정수
-               arrowNull: false,
+               allowNull: false,
                //null 제약조건 -> not null
             },
             //married 컬럼 정의
             married: {
                type: Sequelize.BOOLEAN,
                //true, false값이 저장되는 타입 tinyint
-               arrowNull: false,
+               allowNull: false,
                //null 제약조건 -> not null
             },
             //comment 컬럼 정의
             comment: {
                type: Sequelize.TEXT,
                //text
-               arrowNull: false,
+               allowNull: false,
                //null 제약조건 -> not null
             },
             //create_at 컬럼 정의
             create_at: {
                type: Sequelize.DATE,
                //날짜와 시간을 저장하는 datetime
-               arrowNull: false,
+               allowNull: false,
                //null 제약조건 -> not null
                defaultValue: Sequelize.NOW,
                //디폴트값으로 현재 시간 설정

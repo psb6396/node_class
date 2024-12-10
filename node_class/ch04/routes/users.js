@@ -9,8 +9,8 @@ router
    // get 요청: 모든 사용자 조회
    .get(async (req, res, next) => {
       try {
-         const user = await User.findAll()
-         res.status(200).json(user)
+         const users = await User.findAll()
+         res.status(200).json(users)
       } catch (error) {
          console.error(error)
          next(error)
