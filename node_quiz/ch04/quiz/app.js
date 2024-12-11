@@ -14,6 +14,14 @@ const app = express()
 app.set('port', process.env.PORT || 8000)
 
 // 데이터베이스 연결 설정
+sequelize
+   .sync({ force: false }) // force: true는 기존 테이블 초기화를 의미 (주의!)
+   .then(() => {
+      console.log('데이터베이스 연결 성공')
+   })
+   .catch((err) => {
+      console.error(err) // 연결 실패 시 에러 출력
+   })
 
 // 공통 미들웨어 설정
 app.use(morgan('dev'))
