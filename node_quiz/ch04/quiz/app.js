@@ -7,6 +7,8 @@ const dotenv = require('dotenv') // 환경 변수 관리 라이브러리
 const { sequelize } = require('./models') // Sequelize를 통해 데이터베이스 연결
 
 // 라우터 모듈 불러오기
+const indexRouter = require('./routes/index')
+const authorsRouter = require('./routes/authors')
 
 dotenv.config()
 
@@ -30,6 +32,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // 라우터 연결
+app.use('/', indexRouter)
+app.use('/authors', authorsRouter)
 
 // 404 에러 처리 미들웨어
 app.use((req, res, next) => {
