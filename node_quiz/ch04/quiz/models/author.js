@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize')
-// const { init } = require('../../../../node_class/ch04/models/user')
 
 module.exports = class Author extends Sequelize.Model {
    static init(sequelize) {
