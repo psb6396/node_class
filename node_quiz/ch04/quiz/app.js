@@ -9,6 +9,7 @@ const { sequelize } = require('./models') // Sequelize를 통해 데이터베이
 // 라우터 모듈 불러오기
 const indexRouter = require('./routes/index')
 const authorsRouter = require('./routes/authors')
+const booksRouter = require('./routes/books')
 
 dotenv.config()
 
@@ -34,6 +35,7 @@ app.use(express.urlencoded({ extended: false }))
 // 라우터 연결
 app.use('/', indexRouter)
 app.use('/authors', authorsRouter)
+app.use('/books', booksRouter)
 
 // 404 에러 처리 미들웨어
 app.use((req, res, next) => {

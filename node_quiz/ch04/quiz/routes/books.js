@@ -28,19 +28,38 @@ router
       }
    })
 
-router.route('/:id').patch(async (req, res, next) => {
-   try {
-      const modified_book = await Book.update({
-         title: req.body.title,
-         genre: req.body.genre,
-      })
-      if (modified_book[0] === 0) {
-         // 수정된 데이터가 없을 경우
-         return res.status(404).json({ message: '책을 찾을 수 없습니다.' })
+router
+   .route('/:id')
+   .patch(async (req, res, next) => {
+      try {
+         const modified_book = await Book.update({
+            title: req.body.title,
+            genre: req.body.genre,
+         })
+         if (modified_book[0] === 0) {
+            // 수정된 데이터가 없을 경우
+            return res.status(404).json({ message: '책을 찾을 수 없습니다.' })
+         }
+         res.json({ message: '책스펙이 수정되었습니다.', result }) // 성공 응답
+      } catch (err) {
+         console.error(err)
+         next(err)
       }
-      res.json({ message: '책스펙이 수정되었습니다.', result }) // 성공 응답
-   } catch (err) {
-      console.error(err)
-      next(err)
-   }
-})
+   })
+   .delete(async (req, res, next) => {
+      try {
+         const result = await Book.destroy({
+            where: { id: req.params.id },
+         })
+         if (result === 0) {
+            // 삭제된 데이터가 없을 경우
+            return res.status(404).json({ message: '책을 찾을 수 없습니다.' })
+         }
+         res.json({ message: '책이 삭제되었습니다.', result }) // 성공 응답
+      } catch (err) {
+         console.error(err) // 에러 로그 출력
+         next(err) // 에러를 다음 미들웨어로 전달
+      }
+   })
+
+module.exports = router
