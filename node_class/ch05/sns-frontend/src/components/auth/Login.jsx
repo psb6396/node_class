@@ -20,7 +20,7 @@ const Login = () => {
             .then(() => navigate('/'))
             .catch((error) => console.error('로그인실패:', error))
       }
-   })
+   }, []) //
 
    const loginButtonContent = useMemo(
       () =>

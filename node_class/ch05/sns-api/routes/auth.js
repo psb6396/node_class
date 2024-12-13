@@ -47,7 +47,7 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
    }
 })
 //로그인 localhost:8000/auth/login
-router.post('/login', isLoggedIn, async (req, res, next) => {
+router.post('/login', isNotLoggedIn, async (req, res, next) => {
    passport.authenticate('local', (authError, user, info) => {
       if (authError) {
          //로그인 인증 중 에러 발생시
