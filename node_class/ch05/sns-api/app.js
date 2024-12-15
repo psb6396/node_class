@@ -47,7 +47,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET)) //쿠키설정
 app.use(
    session({
       resave: false, //세션 데이터가 변경되면 재저장할지 여부 -> 변경사항이 있어야 재저장
-      saveUninitialized: true, //포기화되지않은 세션 저장 여부 -> 초기화되지 않은 빈 세션도 저장
+      saveUninitialized: true, //초기화되지않은 세션 저장 여부 -> 초기화되지 않은 빈 세션도 저장
       secret: process.env.COOKIE_SECRET, //세션 암호화 키
       cookie: {
          httpOnly: true, //javascript로 쿠키에 접근가능한지 여부 -> true일 경우 접근 X
