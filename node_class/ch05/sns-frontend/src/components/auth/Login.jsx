@@ -11,16 +11,19 @@ const Login = () => {
    const navigate = useNavigate()
    const { loading, error } = useSelector((state) => state.auth)
 
-   const handleLogin = useCallback((e) => {
-      e.preventDefault()
-      if (email.trim() && password.trim()) {
-         //이메일과 패스워드가 둘다 입력이 되어있다면
-         dispatch(loginUserThunk({ email, password }))
-            .unwrap()
-            .then(() => navigate('/'))
-            .catch((error) => console.error('로그인실패:', error))
-      }
-   }, []) //
+   const handleLogin = useCallback(
+      (e) => {
+         e.preventDefault()
+         if (email.trim() && password.trim()) {
+            //이메일과 패스워드가 둘다 입력이 되어있다면
+            dispatch(loginUserThunk({ email, password }))
+               .unwrap()
+               .then(() => navigate('/'))
+               .catch((error) => console.error('로그인실패:', error))
+         }
+      },
+      [dispatch, email, navigate, password]
+   ) //
 
    const loginButtonContent = useMemo(
       () =>

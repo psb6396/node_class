@@ -1,10 +1,24 @@
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material'
 import CreateIcon from '@mui/icons-material/Create'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { logoutUserThunk } from '../../features/authSlice'
 
 const Navbar = ({ isAuthenticated, user }) => {
-   const handleLogout = useCallback(() => {})
+   const dispatch = useDispatch()
+   const navigate = useNavigate()
+
+   const handleLogout = useCallback(() => {
+      dispatch(logoutUserThunk())
+         .unwrap()
+         .then(() => {
+            navigate('/')
+         })
+         .catch((error) => {
+            alert(error)
+         })
+   }, [dispatch, navigate])
 
    return (
       <AppBar position="static" style={{ backgroundColor: '#fff' }}>
@@ -24,6 +38,7 @@ const Navbar = ({ isAuthenticated, user }) => {
                   </Link>
                   <Link to="/my" style={{ textDecoration: 'none' }}>
                      <Typography variant="body1" style={{ marginRight: '20px', color: 'black' }}>
+                        {/* ?(optional chaining): 값이 undefined 이거나 null일때 에러를 반환하지 않고 그냥 undefined를 반환 */}
                         {user?.nick} 님
                      </Typography>
                   </Link>
