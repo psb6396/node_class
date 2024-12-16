@@ -6,6 +6,8 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
    //    const [imgUrl, setImgUrl] = useState(initialValues.img ? process.env.REACT_APP_API_URL + initialValues.img : '') //이미지 경로(파일명 포함)
    const [imgUrl, setImgUrl] = useState('')
    const [imgFile, setImgFile] = useState(null) //이미지 파일 객체
+   const [content, setContent] = useState('') //게시물 내용
+   const [hashtags, setHashtags] = useState('')
 
    //이미지 파일 미리보기
    const handleImageChange = useCallback((e) => {
@@ -33,6 +35,9 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
       reader.readAsDataURL(file) //파일을 base64 URL로 변환 (이미지 미리보기에 주로 사용)
    }, [])
 
+   //작성한 내용 전송
+   const handleSubmit = useCallback((e) => {}, [])
+
    return (
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }} encType="multipart/form-data">
          {/* 이미지 업로드 필드 */}
@@ -55,7 +60,8 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
 
          {/* 등록 / 수정 버튼 */}
          <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
-            {submitButtonLabel}
+            {/* {submitButtonLabel} */}
+            등록
          </Button>
       </Box>
    )
