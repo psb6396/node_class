@@ -3,7 +3,7 @@ import CreateIcon from '@mui/icons-material/Create'
 import { Link } from 'react-router-dom'
 import { useCallback } from 'react'
 
-const Navbar = ({ isAuthenticated }) => {
+const Navbar = ({ isAuthenticated, user }) => {
    const handleLogout = useCallback(() => {})
 
    return (
@@ -24,7 +24,7 @@ const Navbar = ({ isAuthenticated }) => {
                   </Link>
                   <Link to="/my" style={{ textDecoration: 'none' }}>
                      <Typography variant="body1" style={{ marginRight: '20px', color: 'black' }}>
-                        님
+                        {user?.nick} 님
                      </Typography>
                   </Link>
                   <Button onClick={handleLogout} variant="outlined">
