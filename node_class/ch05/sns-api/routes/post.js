@@ -170,6 +170,19 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
 //특정 게시물 불러오기(id로 게시물 조회) localhost:8000/post/:id
 router.get('/:id', async (req, res) => {
    try {
+      const post = await Post.findOne({
+         where: { id: req.params.id },
+         include: [
+            {
+               model: User,
+               attributes: ['id', 'nick'],
+            },
+            {
+               model: Hashtag,
+               attributes: ['title'],
+            },
+         ],
+      })
    } catch (error) {
       console.error(error)
       res.status(500).json({ success: false, message: '게시물을 불러오는 중에 오류가 발생했습니다.' })
