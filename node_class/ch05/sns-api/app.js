@@ -75,6 +75,9 @@ app.use((err, req, res, next) => {
    const statusCode = err.status || 500
    const errorMessage = err.message || '서버 내부 오류'
 
+   //개발중에 서버 콘솔에서 에러확인 용도
+   console.log(err)
+
    res.status(statusCode).json({
       success: false,
       message: errorMessage,

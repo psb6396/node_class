@@ -44,3 +44,6 @@ export const logoutUser = async () => {
       throw error
    }
 }
+
+//로그인 상태 확인
+export const checkAuthStatus = async () => {}
