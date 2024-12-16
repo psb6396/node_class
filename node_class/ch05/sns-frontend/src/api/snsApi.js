@@ -45,5 +45,13 @@ export const logoutUser = async () => {
    }
 }
 
-//로그인 상태 확인
-export const checkAuthStatus = async () => {}
+//로그인 상태확인
+export const checkAuthStatus = async () => {
+   try {
+      const response = await snsApi.get('/auth/status')
+      return response
+   } catch (error) {
+      console.error(`API Request 오류: ${error.message}`)
+      throw error
+   }
+}
