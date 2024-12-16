@@ -2,7 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const router = express.Router()
 const bcrypt = require('bcrypt')
-const { isLoggedIn, isNotLoggedIn } = require('./middleware')
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares')
 const User = require('../models/user')
 
 //회원가입 localhost:8000/auth/join
