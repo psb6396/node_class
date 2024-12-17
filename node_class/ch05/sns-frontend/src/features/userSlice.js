@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-const postSlice = createSlice({
+const userSlice = createSlice({
    name: 'user',
    initialState: {
       loading: false,

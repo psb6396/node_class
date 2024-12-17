@@ -60,7 +60,8 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
          formData.append('hashtags', hashtags)
          formData.append('img', imgFile)
 
-         onsubmit(formData) //formData 객체를 전송
+         //postcreatepage.jsx의 handlesubmit() 함수를 실행시킴
+         onSubmit(formData) //formData 객체를 전송
       },
       [content, hashtags, imgFile, onSubmit]
    )
