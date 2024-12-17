@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { checkAuthStatusThunk } from './features/authSlice'
+import PostCreatePage from './pages/PostCreatePage'
 function App() {
    const dispatch = useDispatch()
    const { isAuthenticated, user } = useSelector((state) => state.auth) //로그인상태 가져오기
@@ -23,6 +24,7 @@ function App() {
             <Route path="/" element={<Home isAuthenticated={isAuthenticated} user={user} />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/posts/create" element={<PostCreatePage />} />
          </Routes>
       </>
    )

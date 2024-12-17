@@ -79,7 +79,7 @@ const authSlice = createSlice({
             state.user = action.payload
          })
          .addCase(registerUserThunk.rejected, (state, action) => {
-            state.loading = true
+            state.loading = false
             state.error = action.payload
          })
       //로그인

@@ -36,7 +36,29 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
    }, [])
 
    //작성한 내용 전송
-   const handleSubmit = useCallback((e) => {}, [])
+   const handleSubmit = useCallback((e) => {
+      e.preventDefault()
+
+      if (!content.trim()) {
+         alert('내용을 입력하세요.')
+         return
+      }
+
+      if (!hashtags.trim()) {
+         alert('해시태그를 입력하세요')
+         return
+      }
+
+      if (!imgFile) {
+         alert('이미지 파일을 추가하세요')
+         return
+      }
+
+      const formData = new FormData() //폼 데이터를 쉽게 생성하고 전송할 수 있도록 하는 객체
+      formData.append('content', content)
+      formData.append('hashtags', hashtags)
+      formData.append('img', imgFile)
+   }, [])
 
    return (
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }} encType="multipart/form-data">
