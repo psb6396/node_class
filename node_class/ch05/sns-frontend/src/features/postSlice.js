@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { createPost, updatePost, deletePost, getPostById } from '../api/snsApi'
+import { createPost, updatePost, deletePost, getPostById, getPosts } from '../api/snsApi'
 
 //게시물 등록 Thunk
 export const createPostThunk = createAsyncThunk('posts/createPost', async (postData, { rejectWithValue }) => {
@@ -20,12 +20,22 @@ export const deletePostThunk = createAsyncThunk('posts/deletePost', async (id, {
 //특정 게시물 가져오기
 export const fetchPostByIdThunk = createAsyncThunk('posts/fetchPostById', async (id, { rejectWithValue }) => {})
 
+//전체게시물 리스트 가져오기
+export const fetchPostsThunk = createAsyncThunk('posts/fetchPosts', async (page, { rejectWithValue }) => {
+   try {
+      const response = await getPosts(page)
+      return response.data
+   } catch (error) {
+      return rejectWithValue(error.response?.data?.message || '게시물 리스트 불러오기')
+   }
+})
+
 const postSlice = createSlice({
    name: 'posts',
    initialState: {
       posts: [],
       post: null,
-      Pagination: null,
+      pagination: null,
       loading: false,
       error: null,
    },
@@ -40,6 +50,21 @@ const postSlice = createSlice({
             state.loading = false
          })
          .addCase(createPostThunk.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
+         })
+      //게시물 리스트 불러오기
+      builder
+         .addCase(fetchPostsThunk.pending, (state) => {
+            state.loading = true
+            state.error = null
+         })
+         .addCase(fetchPostsThunk.fulfilled, (state, action) => {
+            state.loading = false
+            state.posts = action.payload.posts
+            state.pagination = action.payload.pagination
+         })
+         .addCase(fetchPostsThunk.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
          })

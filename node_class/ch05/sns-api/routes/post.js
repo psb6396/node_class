@@ -40,6 +40,7 @@ router.post('/', isLoggedIn, upload.single('img'), async (req, res) => {
       console.log(req.file)
       if (!req.file) {
          //업로드된 파일이 없거나 무언가 이상이 생겨서 파일정보가 넘어오지 않는 경우
+         console.log('파일이 없음')
       }
       //게시물 생성
       const post = await Post.create({
@@ -197,7 +198,63 @@ router.get('/:id', async (req, res) => {
    }
 })
 
-//전체 게시물 불러오기(페이징 기능) localhost:8000/post/
-router.get('/', async (req, res) => {})
+//전체 게시물 불러오기(페이징 기능) localhost:8000/post?page=1&limit=3
+router.get('/', async (req, res) => {
+   try {
+      //parseInt('08') -> 일부 브라우저에서 NaN 반환
+      //parseInt('08',10) -> 10진수 8을 반환
+      const page = parseInt(req.query.page, 10) || 1 //page번호(기본값:1)
+      const limit = parseInt(req.query.limit, 10) || 3 //한페이지당 나타낼 레코드 갯수
+      const offset = (page - 1) * limit //오프겟 계산
+
+      //게시물의 전체 갯수 가져오기
+      //select count(*) from post
+      const count = await Post.count()
+
+      //게시물 레코드를 가져오기
+      /*
+         page:1, limit:3, offset:0  -> 0개의 레코드를 건너뛰고 3개의 최신 레코드를 가져온다
+         select * from posts order by createdAt desc limit 3 offset 0
+
+         page:2, limit:3, offset:3  -> 3개의 레코드를 건너뛰고 3개의 최신 레코드를 가져온다
+         select * from posts order by createdAt desc limit 3 offset 3
+
+         page:3, limit:3, offset:6  -> 6개의 레코드를 건너뛰고 3개의 최신 레코드를 가져온다
+         select * from posts order by createdAt desc limit 3 offset 6
+      */
+
+      const posts = await Post.findAll({
+         limit,
+         offset,
+         order: [['createdAt', 'DESC']], //최신날짜 순으로 가져온다.
+         //게시글을 작성한 사람과 게시글에 작성된 해시태그를 같이 가져온다.
+         include: [
+            {
+               model: User,
+               attributes: ['id', 'nick', 'email'],
+            },
+            {
+               model: Hashtag,
+               attributes: ['title'],
+            },
+         ],
+      })
+
+      res.json({
+         success: true,
+         posts,
+         pagination: {
+            totalPosts: count,
+            currentPage: page,
+            totalPages: Math.ceil(count / limit),
+            limit,
+         },
+         message: '게시물이 성공적으로 불러와졌습니다.',
+      })
+   } catch (error) {
+      console.error(error)
+      res.status(500).json({ success: false, message: '게시물리스트를 불러오는 중에 오류가 발생했습니다.' })
+   }
+})
 
 module.exports = router
