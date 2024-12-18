@@ -1,7 +1,7 @@
 import { Container } from '@mui/material'
 import PostForm from '../components/post/PostForm'
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPostByIdThunk } from '../features/postSlice'
 
@@ -14,8 +14,10 @@ const PostEditPage = () => {
    useEffect(() => {
       dispatch(fetchPostByIdThunk(id))
    }, [dispatch, id])
+   const handleSubmit = useCallback(() => {}, [])
    if (loading) return <p>로딩중</p>
    if (error) return <p>에러발생: {error}</p>
+
    return (
       <Container>
          <h1>게시물 수정</h1>

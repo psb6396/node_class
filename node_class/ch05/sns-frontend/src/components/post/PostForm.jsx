@@ -11,11 +11,12 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
          createdAt: asdfasd,
          updatedAt asdfsadf,
          User: {...},
-         Hashtag: [
+         Hashtags: [
             {title: '여행',PostHashtag: {..}},
             {title: '맛집',PostHashtag: {..}},
             {title: '맛집',PostHashtag: {..}},
          ],
+         => #여행 #맛집 #스위스
       }
    */
    //http:// localhost8000/dog13487193487.jpg
@@ -23,7 +24,7 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
    // const [imgUrl, setImgUrl] = useState('')
    const [imgFile, setImgFile] = useState(null) //이미지 파일 객체
    const [content, setContent] = useState(initialValues.content || '') //게시물 내용
-   const [hashtags, setHashtags] = useState('')
+   const [hashtags, setHashtags] = useState(initialValues.Hashtags ? initialValues.Hashtags.map((tag) => `#${tag.title}`).join(' ') : '')
 
    //이미지 파일 미리보기
    const handleImageChange = useCallback((e) => {
@@ -82,6 +83,8 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
       [content, hashtags, imgFile, onSubmit]
    )
 
+   const submitButtonLabel = useMemo(() => (initialValues.id ? '수정하기' : '등록하기'), [initialValues.id])
+
    return (
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }} encType="multipart/form-data">
          {/* 이미지 업로드 필드 */}
@@ -104,8 +107,7 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
 
          {/* 등록 / 수정 버튼 */}
          <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
-            {/* {submitButtonLabel} */}
-            등록
+            {submitButtonLabel}
          </Button>
       </Box>
    )
