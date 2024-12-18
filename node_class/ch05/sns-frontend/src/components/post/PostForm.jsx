@@ -67,7 +67,7 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
             return
          }
 
-         if (!imgFile) {
+         if (!imgFile && !initialValues.id) {
             alert('이미지 파일을 추가하세요')
             return
          }
@@ -83,6 +83,7 @@ const PostForm = ({ onSubmit, initialValues = {} }) => {
       [content, hashtags, imgFile, onSubmit]
    )
 
+   // state 변경시 등록/수정 버튼 재연산 방지
    const submitButtonLabel = useMemo(() => (initialValues.id ? '수정하기' : '등록하기'), [initialValues.id])
 
    return (
