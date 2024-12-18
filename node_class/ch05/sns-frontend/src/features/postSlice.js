@@ -125,7 +125,7 @@ const postSlice = createSlice({
          })
          .addCase(updatePostThunk.fulfilled, (state, action) => {
             state.loading = false
-            state.post = action.payload.post
+            // state.post = action.payload.post
          })
          .addCase(updatePostThunk.rejected, (state, action) => {
             state.loading = false

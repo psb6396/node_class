@@ -81,6 +81,11 @@ export const updatePost = async (id, postData) => {
             'Content-Type': 'multipart/form-data', // 데이터 형식 지정
          },
       }
+
+      for (const x of postData.entries()) {
+         console.log(x)
+      }
+
       const response = await snsApi.put(`/post/${id}`, postData, config)
       return response
    } catch (error) {
