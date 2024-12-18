@@ -3,10 +3,26 @@ import { TextField, Button, Box } from '@mui/material'
 
 // 등록, 수정 폼 컴포넌트
 const PostForm = ({ onSubmit, initialValues = {} }) => {
-   //    const [imgUrl, setImgUrl] = useState(initialValues.img ? process.env.REACT_APP_API_URL + initialValues.img : '') //이미지 경로(파일명 포함)
-   const [imgUrl, setImgUrl] = useState('')
+   /*
+      initialValues = {
+         id: 1,
+         content : 'asdfasf',
+         img: '/dog13487193487',
+         createdAt: asdfasd,
+         updatedAt asdfsadf,
+         User: {...},
+         Hashtag: [
+            {title: '여행',PostHashtag: {..}},
+            {title: '맛집',PostHashtag: {..}},
+            {title: '맛집',PostHashtag: {..}},
+         ],
+      }
+   */
+   //http:// localhost8000/dog13487193487.jpg
+   const [imgUrl, setImgUrl] = useState(initialValues.img ? process.env.REACT_APP_API_URL + initialValues.img : '') //이미지 경로(파일명 포함)
+   // const [imgUrl, setImgUrl] = useState('')
    const [imgFile, setImgFile] = useState(null) //이미지 파일 객체
-   const [content, setContent] = useState('') //게시물 내용
+   const [content, setContent] = useState(initialValues.content || '') //게시물 내용
    const [hashtags, setHashtags] = useState('')
 
    //이미지 파일 미리보기

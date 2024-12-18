@@ -2,19 +2,26 @@ import { Card, CardMedia, CardContent, Typography, Box, CardActions, Button, Ico
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import dayjs from 'dayjs' //날짜 시간 포맷해주는 패키지
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { deletePostThunk } from '../../features/postSlice'
 
 const PostItem = ({ post, isAuthenticated, user }) => {
-   const navigate = useNavigate()
    const dispatch = useDispatch()
 
    //게시물 삭제 실행
    const onClickDelete = useCallback((id) => {
       dispatch(deletePostThunk(id))
+         .unwrap()
+         .then(() => {
+            window.location.href = '/' //페이지 경로 이동
+         })
+         .catch((error) => {
+            console.error('게시물 삭제 중 오류 발생:', error)
+            alert('게시물 삭제에 실패했습니다', error)
+         })
    }, [])
 
    return (

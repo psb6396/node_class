@@ -26,7 +26,14 @@ export const deletePostThunk = createAsyncThunk('posts/deletePost', async (id, {
 })
 
 //특정 게시물 가져오기
-export const fetchPostByIdThunk = createAsyncThunk('posts/fetchPostById', async (id, { rejectWithValue }) => {})
+export const fetchPostByIdThunk = createAsyncThunk('posts/fetchPostById', async (id, { rejectWithValue }) => {
+   try {
+      const response = await getPostById(id)
+      return response.data //삭제 성공 후 삭제된 게시물의 id 만 반환
+   } catch (error) {
+      return rejectWithValue(error.response?.data?.message || '게시물 불러오기 실패')
+   }
+})
 
 //전체게시물 리스트 가져오기
 export const fetchPostsThunk = createAsyncThunk('posts/fetchPosts', async (page, { rejectWithValue }) => {
@@ -84,10 +91,22 @@ const postSlice = createSlice({
          })
          .addCase(deletePostThunk.fulfilled, (state, action) => {
             state.loading = false
-            //게시물 리스트가 있는 메인 페이지를 새로고침 하지 않아도 state가 변경되면서 재렌더링이 발생하면 게시물이 삭제된 것처럼 보인다.(실제 db에서도 삭제됨)
-            state.posts = state.posts.filter((post) => post.id !== action.payload) //삭제된 게시물을 posts state에서 제거
          })
          .addCase(deletePostThunk.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
+         })
+      //특정 게시물 불러오기
+      builder
+         .addCase(fetchPostByIdThunk.pending, (state) => {
+            state.loading = true
+            state.error = null
+         })
+         .addCase(fetchPostByIdThunk.fulfilled, (state, action) => {
+            state.loading = false
+            state.post = action.payload.post
+         })
+         .addCase(fetchPostByIdThunk.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload
          })
