@@ -2,12 +2,20 @@ import { Card, CardMedia, CardContent, Typography, Box, CardActions, Button, Ico
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs' //날짜 시간 포맷해주는 패키지
 import { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { deletePostThunk } from '../../features/postSlice'
 
 const PostItem = ({ post, isAuthenticated, user }) => {
-   const onClickDelete = useCallback((id) => {}, [])
+   const navigate = useNavigate()
+   const dispatch = useDispatch()
+
+   //게시물 삭제 실행
+   const onClickDelete = useCallback((id) => {
+      dispatch(deletePostThunk(id))
+   }, [])
 
    return (
       <Card style={{ margin: '20px 0' }}>
