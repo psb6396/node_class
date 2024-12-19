@@ -12,9 +12,9 @@ export const getProfileThunk = createAsyncThunk('page/getProfile', async (_, { r
 })
 
 // 특정인 프로필 정보 가져오기
-export const getProfileIdThunk = createAsyncThunk('page/getProfile', async (_, { rejectWithValue }) => {
+export const getProfileIdThunk = createAsyncThunk('page/getProfileId', async (id, { rejectWithValue }) => {
    try {
-      const response = await getProfileId()
+      const response = await getProfileId(id)
       return response.data.user
    } catch (error) {
       return rejectWithValue(error.response?.data?.message || '특정인 프로필 정보 불러오기 실패')

@@ -17,7 +17,7 @@ router.post('/:id/follow', isLoggedIn, async (req, res) => {
       }
    } catch (error) {
       console.error(error)
-      res.status(500).json({ success: false, message: '특정 사용자 정보를 불러오는 중 오류가 발생했습니다.', error })
+      res.status(500).json({ success: false, message: '팔로우하는 중 오류가 발생했습니다.', error })
    }
 })
 
