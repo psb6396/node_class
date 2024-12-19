@@ -12,7 +12,22 @@ module.exports = () => {
    //역직렬화(deserializeUser) : 클라이언트에게 request가 올때 마다 세션에 저장된 사용자 id를 바탕으로 사용자 정보를 조회
    passport.deserializeUser((id, done) => {
       //response 해주고싶은 사용자 정보를 작성
-      User.findOne({ where: { id } }) //id는 직렬화에서 저장한 user.id
+      User.findOne({
+         where: { id },
+         attributes: ['id', 'nick', 'email', 'createdAt', 'updatedAt'],
+         include: [
+            {
+               model: User,
+               as: 'Followers',
+               attributes: ['id', 'nick', 'email'],
+            },
+            {
+               model: User,
+               as: 'Followings',
+               attributes: ['id', 'nick', 'email'],
+            },
+         ],
+      }) //id는 직렬화에서 저장한 user.id
          .then((user) => done(null, user)) // 가져온 사용자 객체 정보를 반환
          .catch((err) => done(err)) //에러발생시 에러 반환
    })
