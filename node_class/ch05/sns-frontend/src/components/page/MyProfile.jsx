@@ -26,7 +26,7 @@ const MyProfile = ({ auth }) => {
             .unwrap()
             .then((result) => {
                setFollowers(result.Followers.length)
-               setFollowings(result.Followers.length)
+               setFollowings(result.Followings.length)
             })
             .catch((error) => {
                console.error('사용자 정보 가져오는 중 오류 발생:', error)
@@ -37,7 +37,7 @@ const MyProfile = ({ auth }) => {
             .unwrap()
             .then((result) => {
                setFollowers(result.Followers.length)
-               setFollowings(result.Followers.length)
+               setFollowings(result.Followings.length)
             })
             .catch((error) => {
                console.error('사용자 정보 가져오는 중 오류 발생:', error)
