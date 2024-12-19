@@ -153,7 +153,7 @@ export const getProfileId = async (id) => {
 //사용자를 팔로우
 export const followUser = async (id) => {
    try {
-      const response = await snsApi.get(`/user/${id}/follow`)
+      const response = await snsApi.post(`/user/${id}/follow`)
       return response
    } catch (error) {
       console.error(`API Request 오류: ${error.message}`)
