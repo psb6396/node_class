@@ -22,7 +22,7 @@ const Login = () => {
                .catch((error) => console.error('로그인실패:', error))
          }
       },
-      [dispatch, email, navigate, password]
+      [dispatch, navigate, email, password]
    ) //
 
    const loginButtonContent = useMemo(

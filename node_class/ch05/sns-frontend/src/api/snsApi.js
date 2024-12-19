@@ -26,6 +26,7 @@ export const registerUser = async (userData) => {
 //로그인
 export const loginUser = async (credentials) => {
    try {
+      // console.log('sadf')
       const response = await snsApi.post('/auth/login', credentials)
       return response
    } catch (error) {

@@ -28,9 +28,11 @@ export const registerUserThunk = createAsyncThunk('auth/registerUser', async (us
 */
 export const loginUserThunk = createAsyncThunk('auth/loginUser', async (Credentials, { rejectWithValue }) => {
    try {
+      // console.log(Credentials)
       const response = await loginUser(Credentials)
       return response.data.user
    } catch (error) {
+      console.log('asdf')
       return rejectWithValue(error.response?.data?.message || '로그인 실패')
    }
 })
