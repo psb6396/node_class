@@ -8,6 +8,7 @@ import { fetchPostByIdThunk, updatePostThunk } from '../features/postSlice'
 const PostEditPage = () => {
    const { id } = useParams() //post의 id
    const dispatch = useDispatch()
+
    const { post, loading, error } = useSelector((state) => state.posts)
 
    //게시물 데이터 불러오기
