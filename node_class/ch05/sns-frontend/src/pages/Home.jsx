@@ -17,6 +17,7 @@ const Home = ({ isAuthenticated, user }) => {
    const handlePageChange = useCallback((event, value) => {
       setPage(value)
    }, [])
+
    return (
       <Container maxWidth="xs">
          <Typography variant="h4" align="center" gutterBottom>
